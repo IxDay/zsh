@@ -91,6 +91,9 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# Add support for https://direnv.net/
+eval "$(direnv hook zsh)"
+
 export KEYTIMEOUT=1
 source "${ZDOTDIR}/prompt.sh"
 
