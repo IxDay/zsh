@@ -24,15 +24,21 @@ function sync() {
 setopt appendhistory autocd extendedglob nomatch prompt_subst
 unsetopt beep notify
 bindkey -v
-zstyle :compinstall filename '/home/max/.config/zsh/.zshrc'
 
 autoload -Uz compaudit compinit up-line-or-beginning-search down-line-or-beginning-search
 
 compinit -i -d "${ZDOTDIR}/.zcompdump"
 
+# menu selection
+zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
 
-# history search
+# https://wiki.archlinux.org/index.php/zsh#History_search
+#
+HISTFILE=~/.config/zsh/.histfile
+HISTSIZE=1000
+SAVEHIST=5000
+
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
