@@ -21,19 +21,14 @@ function sync() {
     ) & echo $! > .sync.lock
 }
 
-HISTFILE=~/.config/zsh/.histfile
-HISTSIZE=1000
-SAVEHIST=5000
-setopt appendhistory autocd extendedglob nomatch
+setopt appendhistory autocd extendedglob nomatch prompt_subst
 unsetopt beep notify
 bindkey -v
 zstyle :compinstall filename '/home/max/.config/zsh/.zshrc'
 
-fpath=(${ZDOTDIR} $fpath)
-autoload -Uz compaudit compinit promptinit up-line-or-beginning-search down-line-or-beginning-search
+autoload -Uz compaudit compinit up-line-or-beginning-search down-line-or-beginning-search
 
 compinit -i -d "${ZDOTDIR}/.zcompdump"
-source "${ZDOTDIR}/lib.sh"
 
 setopt COMPLETE_ALIASES
 
@@ -53,14 +48,17 @@ bindkey '^u' backward-kill-line
 bindkey '^d' beginning-of-line
 bindkey '^e' end-of-line
 
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%F{green} [% VIM]%  %{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-    zle reset-prompt
-}
 
-zle -N zle-line-init
-zle -N zle-keymap-select
+# https://dougblack.io/words/zsh-vi-mode.html
+#function zle-line-init zle-keymap-select {
+#    VIM_PROMPT="%F{green} [% VIM]%  %{$reset_color%}"
+#    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+#    zle reset-prompt
+#}
+#
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+
 export KEYTIMEOUT=1
-
 source "${ZDOTDIR}/prompt.sh"
+

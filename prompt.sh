@@ -1,8 +1,9 @@
+# disables prompt mangling in virtual_env/bin/activate
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 _venv () {
-    local env=$(virtualenv_prompt_info)
-    if [ ! -z "$env" ]; then
-        echo "| %F{red}${env:1:-1} %F{blue}"
-    fi
+    [[ -n ${VIRTUAL_ENV} ]] || return
+    echo "| %F{red}${VIRTUAL_ENV:t} %F{blue}"
 }
 
 _zsh_git () {
