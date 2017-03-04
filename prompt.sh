@@ -1,11 +1,7 @@
-_blue () {
-    echo "%{\e[0;34m%}"
-}
-
 _venv () {
     local env=$(virtualenv_prompt_info)
     if [ ! -z "$env" ]; then
-        echo "| %{\e[0;31m%}${env:1:-1} $(_blue)"
+        echo "| %F{red}${env:1:-1} %F{blue}"
     fi
 }
 
@@ -14,22 +10,22 @@ _zsh_git () {
     ZSH_THEME_GIT_PROMPT_SUFFIX=""
     local git=$(git_prompt_info)
     if [ ! -z "$git" ]; then
-        echo "%{\e[0;36m%} $git $(_blue)|"
+        echo "%F{cyan} $git %F{blue}|"
     fi
 }
 
 _name () {
-    echo "%{\e[0;36m%}%n%{\e[0;33m%}@%{\e[1;36m%}%m$(_blue)"
+    echo "%F{cyan}%n%F{yellow}@%F{cyan}%m%F{blue}"
 }
 
 _path () {
-    echo "%{\e[0;33m%}%d$(_blue)"
+    echo "%F{yellow}%d%F{blue}"
 }
 
 _date () {
-    echo "%{\e[0;32m%}%D{"%I:%M"}$(_blue)"
+    echo "%F{green}%D{"%I:%M"}%F{blue}"
 }
 
 PROMPT=\
-"$(_blue)┌──[ $(_name) ]──[ $(_path) ]
-$( _blue)└──[$(_zsh_git) $(_date) $(_venv)]───╼ %F{white}"
+"%F{blue}┌──[ $(_name) ]──[ $(_path) ]
+%F{blue }└──[$(_zsh_git) $(_date) $(_venv)]───╼ %F{white}"
