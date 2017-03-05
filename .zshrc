@@ -11,6 +11,9 @@ alias sshi="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias scpi="scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias drun="docker run --rm -ti"
 
+# dirty hack
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+
 function sync() {
     [ -e .sync.lock ] && echo "sync is already running!" && return 1
     (
