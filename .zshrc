@@ -11,15 +11,31 @@ alias sshi="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias scpi="scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias dockerr="docker run --rm -ti"
 
-# dirty hack
-alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
-
 function sync() {
-    [ -e .sync.lock ] && echo "sync is already running!" && return 1
+	case "$1" in
+		start)
+			shift
+			;;
+		stop)
+			[ ! -e .sync.lock ] && echo "there is no sync running here!" \
+				&& return 1
+			kill $(cat .sync.lock) && rm .sync.lock
+			return 0
+			;;
+		*)
+			echo "Usage: $0 {start|stop} [user@remote:dest]"
+			return 1
+			;;
+	esac
+
+	[ -e .sync.lock ] && [ -d "/proc/$(cat .sync.lock)" ] && \
+		echo "sync is already running!" && return 1
     (
         inotifywait -rqme close_write,create . | while read
         do
-            rsync -avz --delete --exclude=.v --exclude=.git $(pwd) "$1" &> /dev/null
+            rsync -avz --delete --exclude=.v --exclude=.git --exclude=.direnv\
+				--exclude=.envrc \
+				$(pwd) "$1" &> /dev/null
         done
     ) & echo $! > .sync.lock
 }
@@ -80,7 +96,7 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 bindkey '^u' backward-kill-line
-bindkey '^d' beginning-of-line
+bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
 
