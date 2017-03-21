@@ -34,8 +34,9 @@ function sync() {
     (
         inotifywait -rqme close_write,create . | while read
         do
-            rsync -avz --delete --exclude=.v --exclude=.git --exclude=.direnv\
-				--exclude=.envrc \
+            rsync -avz --delete \
+			-e "ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null" \
+			--exclude=.v --exclude=.git --exclude=.direnv --exclude=.envrc \
 				$(pwd) "$1" &> /dev/null
         done
     ) & echo $! > .sync.lock
