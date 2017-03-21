@@ -10,6 +10,7 @@ alias jq="jq -C"
 alias sshi="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias scpi="scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 alias dockerr="docker run --rm -ti"
+alias dockerip="docker inspect -f '{{.NetworkSettings.IPAddress}}'"
 
 function sync() {
 	case "$1" in
