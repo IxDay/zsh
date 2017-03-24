@@ -57,9 +57,11 @@ setopt COMPLETE_ALIASES
 
 # https://wiki.archlinux.org/index.php/zsh#History_search
 #
-HISTFILE=~/.config/zsh/.histfile
-HISTSIZE=1000
-SAVEHIST=5000
+export HISTFILE=~/.config/zsh/.histfile
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
 
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
