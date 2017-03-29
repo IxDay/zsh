@@ -1,17 +1,20 @@
-alias ls="ls --color"
-alias la="ls -lAh"
-alias ll="ls -lh"
-alias sudo="sudo -E"
-alias _="sudo -E"
-alias svim="sudo -E nvim"
-alias vim="nvim"
-alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
-alias jq="jq -C"
-alias server="python3 -m http.server"
-alias sshi="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
-alias scpi="scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
-alias dockerr="docker run --rm -ti"
-alias dockerip="docker inspect -f '{{.NetworkSettings.IPAddress}}'"
+alias ls='ls --color'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias sudo='sudo -E'
+alias _='sudo -E'
+alias svim='sudo -E nvim'
+alias vim='nvim'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias jq='jq -C'
+alias server='python3 -m http.server'
+alias sshi='ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+alias scpi='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+
+alias dockerr='docker run --rm -ti'
+alias dockerip='docker inspect -f "{{.NetworkSettings.IPAddress}}"'
+alias dockerrm='docker rm $(docker ps -qa)'
+alias dockerrmi='docker rmi $(docker images | awk '\''$1 ~ /\<none\>/ {print $3}'\'')'
 
 function sync() {
 	case "$1" in
