@@ -49,7 +49,6 @@ function sync() {
 
 setopt appendhistory autocd extendedglob nomatch prompt_subst
 unsetopt beep notify
-bindkey -v
 
 autoload -Uz compaudit compinit up-line-or-beginning-search down-line-or-beginning-search
 
@@ -98,6 +97,7 @@ setopt PUSHD_MINUS
 
 ###### end ######
 
+bindkey -e # emacs mode
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -107,17 +107,6 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^u' backward-kill-line
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
-
-
-# https://dougblack.io/words/zsh-vi-mode.html
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%F{green} [% VIM]%  %{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
 
 # Add support for https://direnv.net/
 eval "$(direnv hook zsh)"
