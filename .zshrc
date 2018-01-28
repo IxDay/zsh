@@ -9,6 +9,7 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias jq='jq -C'
 alias server='python3 -m http.server'
 alias sshi='ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+alias sshp='ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no'
 alias scpi='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 
 alias dockerr='docker run --rm -ti'
