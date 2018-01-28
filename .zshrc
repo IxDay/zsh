@@ -17,6 +17,8 @@ alias dockerrm='docker rm $(docker ps -qa)'
 alias dockerrmi='docker rmi $(docker images | awk '\''$1 ~ /\<none\>/ {print $3}'\'')'
 alias dockerrmv='docker volume rm $(docker volume ls -qf dangling=true)'
 alias dockerps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
+alias cd='HOME=${PROJECT:-$HOME} cd'
+
 
 function sync() {
 	case "$1" in
