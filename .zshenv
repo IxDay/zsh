@@ -14,3 +14,4 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
 
 export PATH="$XDG_DATA_HOME/bin:$PATH"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
