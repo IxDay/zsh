@@ -12,6 +12,7 @@ export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
+export KUBECONFIG="$XDG_CONFIG_HOME/kube"
+export RANDFILE="$XDG_DATA_HOME/rnd"
 
-export PATH="$XDG_DATA_HOME/bin:$PATH"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"

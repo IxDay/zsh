@@ -20,6 +20,9 @@ alias dockerrmv='docker volume rm $(docker volume ls -qf dangling=true)'
 alias dockerps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
 alias cd='HOME=${PROJECT:-$HOME} cd'
 
+[ -f "/var/lib/proxydriver/environment.sh" ] && . "/var/lib/proxydriver/environment.sh"
+export PATH="$(dirname "$XDG_DATA_HOME")/bin:$PATH"
+
 
 function sync() {
 	case "$1" in
@@ -51,7 +54,7 @@ function sync() {
     ) & echo $! > .sync.lock
 }
 
-setopt appendhistory autocd extendedglob nomatch prompt_subst
+setopt appendhistory autocd extendedglob nomatch prompt_subst kshglob
 unsetopt beep notify
 
 autoload -Uz compaudit compinit up-line-or-beginning-search down-line-or-beginning-search
