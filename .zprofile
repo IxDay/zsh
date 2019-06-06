@@ -1,5 +1,10 @@
+# https://stackoverflow.com/questions/21038903/path-variable-in-zshenv-or-zshrc/34244862
+# https://bbs.archlinux.org/viewtopic.php?id=180845
+# https://bugs.archlinux.org/task/35966
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Move as many as possible inside CONFIG_HOME
 export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
@@ -15,5 +20,10 @@ export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
 export RANDFILE="$XDG_DATA_HOME/rnd"
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$GOPATH/bin"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
+export PATH="${XDG_DATA_HOME}/../bin:$PATH:$GOBIN"
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"

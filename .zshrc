@@ -1,64 +1,18 @@
-alias ls='ls --color'
-alias la='ls -lAh'
-alias ll='ls -lh'
-alias sudo='sudo -E'
-alias _='sudo -E'
-alias svim='sudo -E nvim'
-alias vim='nvim'
-alias grep='grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
-alias less='less -R'
-alias jq='jq -C'
-alias server='python3 -m http.server'
-alias sshi='ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
-alias sshp='ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no'
-alias scpi='scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+source "${ZDOTDIR}/aliases.sh"
+source "${ZDOTDIR}/functions.sh"
 
-alias dockerr='docker run --rm -ti'
-alias dockerip='docker inspect -f "{{.NetworkSettings.IPAddress}}"'
-alias dockerrm='docker rm $(docker ps -qa)'
-alias dockerrmi='docker rmi $(docker images | awk '\''$1 ~ /\<none\>/ {print $3}'\'')'
-alias dockerrmv='docker volume rm $(docker volume ls -qf dangling=true)'
-alias dockerps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
-alias cd='HOME=${PROJECT:-$HOME} cd'
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
 
 [ -f "/var/lib/proxydriver/environment.sh" ] && . "/var/lib/proxydriver/environment.sh"
-export PATH="$(dirname "$XDG_DATA_HOME")/bin:$PATH"
 
-
-function sync() {
-	case "$1" in
-		start)
-			shift
-			;;
-		stop)
-			[ ! -e .sync.lock ] && echo "there is no sync running here!" \
-				&& return 1
-			kill $(cat .sync.lock) && rm .sync.lock
-			return 0
-			;;
-		*)
-			echo "Usage: $0 {start|stop} [user@remote:dest]"
-			return 1
-			;;
-	esac
-
-	[ -e .sync.lock ] && [ -d "/proc/$(cat .sync.lock)" ] && \
-		echo "sync is already running!" && return 1
-    (
-        inotifywait -rqme close_write,create . | while read
-        do
-            rsync -avz --delete \
-			-e "ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null" \
-			--exclude=.v --exclude=.git --exclude=.direnv --exclude=.envrc \
-				$(pwd) "$1" &> /dev/null
-        done
-    ) & echo $! > .sync.lock
-}
+export LS_COLORS="di=0;34:ex=0;32"
 
 setopt appendhistory autocd extendedglob nomatch prompt_subst kshglob
 unsetopt beep notify
 
-autoload -Uz compaudit compinit up-line-or-beginning-search down-line-or-beginning-search
+autoload -Uz compaudit up-line-or-beginning-search down-line-or-beginning-search compinit
 
 compinit -i -d "${ZDOTDIR}/.zcompdump"
 
@@ -121,4 +75,3 @@ eval "$(direnv hook zsh)"
 
 export KEYTIMEOUT=1
 source "${ZDOTDIR}/prompt.sh"
-

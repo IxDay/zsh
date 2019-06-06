@@ -28,4 +28,4 @@ _date () {
 }
 PROMPT=\
 $'%F{blue}┌──[ $(_name) ]──[ $(_path) ]\n'\
-$'%F{blue}└──[$(_zsh_git) $(_date) $(_venv)]───╼ %F{white}'
+$'%F{blue}└──[$(_zsh_git) $(_date) $(_venv)]───╼ %f'
