@@ -1,3 +1,4 @@
+eval "$(dircolors ${ZDOTDIR}/dircolors.sh)"
 source "${ZDOTDIR}/aliases.sh"
 source "${ZDOTDIR}/functions.sh"
 
@@ -7,7 +8,7 @@ fi
 
 [ -f "/var/lib/proxydriver/environment.sh" ] && . "/var/lib/proxydriver/environment.sh"
 
-export LS_COLORS="di=0;34:ex=0;32"
+#export LS_COLORS="di=0;34:ex=0;32"
 
 setopt appendhistory autocd extendedglob nomatch prompt_subst kshglob
 unsetopt beep notify
