@@ -24,3 +24,5 @@ alias dockerps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.St
 alias cd='HOME=${PROJECT:-$HOME} cd'
 alias tmux='/usr/bin/tmux  -f $HOME/.config/tmux/tmux.conf'
 alias gok='ps aux | grep "[/]tmp/go" | tr -s " " | cut -d" " -f2 | xargs kill'
+
+alias tmpdir='cd $(mktemp -d)'

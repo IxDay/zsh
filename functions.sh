@@ -8,3 +8,6 @@ function fpane() {
 	tmux split-window -d -h -t2
 }
 
+function delline() {
+	sed -ie "${1}d" ${2}
+}
