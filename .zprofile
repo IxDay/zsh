@@ -22,6 +22,7 @@ export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
+export HELM_HOME="$XDG_CONFIG_HOME/helm"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 export PATH="${XDG_DATA_HOME}/../bin:$PATH:$GOBIN"
 
