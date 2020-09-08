@@ -1,15 +1,3 @@
-eval "$(dircolors ${ZDOTDIR}/dircolors.sh)"
-source "${ZDOTDIR}/aliases.sh"
-source "${ZDOTDIR}/functions.sh"
-
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
-fi
-
-[ -f "/var/lib/proxydriver/environment.sh" ] && . "/var/lib/proxydriver/environment.sh"
-
-#export LS_COLORS="di=0;34:ex=0;32"
-
 setopt appendhistory autocd extendedglob nomatch prompt_subst kshglob
 unsetopt beep notify
 
@@ -19,7 +7,6 @@ compinit -i -d "${ZDOTDIR}/.zcompdump"
 
 # menu selection
 zstyle ':completion:*' menu select
-setopt COMPLETE_ALIASES
 
 # https://wiki.archlinux.org/index.php/zsh#History_search
 #
@@ -71,8 +58,16 @@ bindkey '^u' backward-kill-line
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-# Add support for https://direnv.net/
-eval "$(direnv hook zsh)"
+if [ $commands[/usr/bin/kubectl] ]; then
+  source <(/usr/bin/kubectl completion zsh)
+fi
 
 export KEYTIMEOUT=1
+
+# Add support for https://direnv.net/
+eval "$(direnv hook zsh)"
+eval "$(dircolors ${ZDOTDIR}/dircolors.sh)"
+
 source "${ZDOTDIR}/prompt.sh"
+source "${ZDOTDIR}/aliases.sh"
+source "${ZDOTDIR}/functions.sh"

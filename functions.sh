@@ -11,3 +11,7 @@ function fpane() {
 function delline() {
 	sed -ie "${1}d" ${2}
 }
+
+function killp() {
+	fuser -k ${1}/tcp
+}
