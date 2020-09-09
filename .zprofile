@@ -24,7 +24,7 @@ export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
 export HELM_HOME="$XDG_CONFIG_HOME/helm"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
-export PATH="${XDG_DATA_HOME}/../bin:$PATH:$GOBIN"
+export PATH="$(readlink -f ${XDG_DATA_HOME}/../bin):$PATH:$GOBIN"
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
