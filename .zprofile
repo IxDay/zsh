@@ -4,8 +4,6 @@
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
 # Move as many as possible inside CONFIG_HOME
 export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
 export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
