@@ -68,6 +68,12 @@ export KEYTIMEOUT=1
 eval "$(direnv hook zsh)"
 eval "$(dircolors ${ZDOTDIR}/dircolors.sh)"
 
+# Add support for https://github.com/pyenv/pyenv
+eval "$(pyenv init -)"
+
+# Add support for scaleway CLI
+eval "$(scw autocomplete script shell=zsh)"
+
 source "${ZDOTDIR}/prompt.sh"
 source "${ZDOTDIR}/aliases.sh"
 source "${ZDOTDIR}/functions.sh"
