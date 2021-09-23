@@ -31,7 +31,10 @@ alias minioctl='mcli -C /home/max/.config/minio'
 alias xclipc='xclip -o -selection clipboard'
 alias gclone='git clone $(xclipc)'
 alias myip='curl -s https://api.myip.com | jq "."'
+
+alias tfclean='rm -rf ~/.terraform.d/plugin-cache/registry.terraform.io/ .terraform.lock.hcl && tg providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=linux_amd64'
 alias tfpin='terraform providers lock -platform=darwin_amd64 -platform=linux_amd64'
+alias tg='PATH="/usr/local/bin/terraform14:$PATH" terragrunt'
 
 alias k="kubectl"
 alias kdebug='kubectl run --stdin --tty --rm debug --image=alpine:3.13 --restart Never'
