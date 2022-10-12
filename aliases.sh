@@ -5,7 +5,7 @@ alias sudo='sudo -E'
 alias _='sudo -E'
 alias svim='sudo -E nvim'
 alias vim='nvim'
-alias grep='grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.terragrunt-cache}'
+alias grep='grep --color=always --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.terragrunt-cache,.next,.direnv}'
 alias less='less -SR'
 alias tree="tree -C"
 alias jqr='/usr/bin/jq -r'
@@ -16,6 +16,7 @@ alias scpi='/usr/bin/scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/nu
 alias rsync='rsync --exclude ".vscode" --exclude ".venv" --exclude ".direnv" --exclude ".git" --delete'
 alias tlscert='openssl x509 -in - -text -noout'
 alias dg='dirs -v | grep'
+alias passwdgen='export LC_CTYPE=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
 
 alias dockerr='docker run --rm -ti'
 alias dockerip='docker inspect -f "{{.NetworkSettings.IPAddress}}"'
@@ -23,18 +24,22 @@ alias dockerrm='docker rm $(docker ps -qa)'
 alias dockerrmi='docker rmi $(docker images | awk '\''$1 ~ /\<none\>/ {print $3}'\'')'
 alias dockerrmv='docker volume rm $(docker volume ls -qf dangling=true)'
 alias dockerps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"'
+
 alias cd='HOME=${PROJECT:-$HOME} cd'
 alias tmux='/usr/bin/tmux  -f $HOME/.config/tmux/tmux.conf'
 alias gok='ps aux | grep "[/]tmp/go" | tr -s " " | cut -d" " -f2 | xargs kill'
-alias tmpdir='cd $(mktemp -d)'
 alias minioctl='mcli -C /home/max/.config/minio'
 alias xclipc='xclip -o -selection clipboard'
 alias gclone='git clone $(xclipc)'
 alias myip='curl -s https://api.myip.com | jq "."'
+alias kkns='NS=`kubectl get ns |grep Terminating | awk 'NR==1 {print $1}'` && kubectl get namespace "$NS" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api
+/v1/namespaces/$NS/finalize -f -'
 
 alias tfclean='rm -rf ~/.terraform.d/plugin-cache/registry.terraform.io/ .terraform.lock.hcl && tg providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=linux_amd64'
 alias tfpin='terraform providers lock -platform=darwin_amd64 -platform=linux_amd64'
 alias tg='PATH="/usr/local/bin/terraform14:$PATH" terragrunt'
+alias tg13='PATH="/usr/local/bin/terraform13:$PATH" terragrunt'
 
 alias k="kubectl"
+alias kx="kubectx"
 alias kdebug='kubectl run --stdin --tty --rm debug --image=alpine:3.13 --restart Never'

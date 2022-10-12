@@ -22,10 +22,13 @@ export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
 export HELM_HOME="$XDG_CONFIG_HOME/helm"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export NVM_DIR="${XDG_DATA_HOME}/nvm"
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 
 _LOCAL_BIN="$(readlink -f ${XDG_DATA_HOME}/../bin)"
 [[ ":$PATH:" != *:"$_LOCAL_BIN":* ]] && export PATH="$_LOCAL_BIN:$PATH"
 [[ ":$PATH:" != *:"$GOBIN":* ]] && export PATH="$PATH:$GOBIN"
+
